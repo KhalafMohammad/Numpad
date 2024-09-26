@@ -15,11 +15,14 @@ namespace Numpad
     {
         public int numpad_value;
         public int numpad_preval;
+        const int MAX_LNGTH = 4;
+
         public Form1 form1 { get; set; }
         public numpad(Form1 form1Instance, string data)
         {
             InitializeComponent();
             form1 = form1Instance;
+            textBox1.MaxLength = 5;
             textBox1.Text = data;
             int.TryParse(data, out numpad_preval);
 
@@ -32,10 +35,8 @@ namespace Numpad
         }
         private void button13_Click(object sender, EventArgs e)
         {
-            OnActivated(e);
-            if (textBox1.Text == "")
+            if (textBox1.Text.Length == 0)
             {
-                button11.BackColor = Color.LightCoral;
                 return;
             }
             else
@@ -43,72 +44,149 @@ namespace Numpad
                 textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
             }
 
+            if (textBox1.Text.Length == 0)
+            {
+                button11.BackColor = Color.LightCoral;
+                return;
+            }
+
         }
+        #region numpad buttons click handels //click me to show the handlers
         private void button1_Click(object sender, EventArgs e)
         {
-
-            button11.BackColor = Color.Red;
-            textBox1.Text += "1";
-            this.Text = numpad_value.ToString();
-            //numpad_Load(sender, e);
+            if (textBox1.Text.Length >= MAX_LNGTH)
+            {
+                return;
+            }
+            else
+            {
+                button11.BackColor = Color.Red;
+                textBox1.Text += "1";
+            }
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            button11.BackColor = Color.Red;
-            textBox1.Text += "2";
+            if (textBox1.Text.Length >= MAX_LNGTH)
+            {
+                return;
+            }
+            else
+            {
+                button11.BackColor = Color.Red;
+                textBox1.Text += "2";
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            button11.BackColor = Color.Red;
-            textBox1.Text += "3";
+            if (textBox1.Text.Length >= MAX_LNGTH)
+            {
+                return;
+            }
+            else
+            {
+                button11.BackColor = Color.Red;
+                textBox1.Text += "3";
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            button11.BackColor = Color.Red;
-            textBox1.Text += "4";
+            if (textBox1.Text.Length >= MAX_LNGTH)
+            {
+                return;
+            }
+            else
+            {
+                button11.BackColor = Color.Red;
+                textBox1.Text += "4";
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            button11.BackColor = Color.Red;
-            textBox1.Text += "5";
+            if (textBox1.Text.Length >= MAX_LNGTH)
+            {
+                return;
+            }
+            else
+            {
+                button11.BackColor = Color.Red;
+                textBox1.Text += "5";
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            button11.BackColor = Color.Red;
-            textBox1.Text += "6";
+            if (textBox1.Text.Length >= MAX_LNGTH)
+            {
+                return;
+            }
+            else
+            {
+                button11.BackColor = Color.Red;
+                textBox1.Text += "6";
+            }
+
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            button11.BackColor = Color.Red;
-            textBox1.Text += "7";
+            if (textBox1.Text.Length >= MAX_LNGTH)
+            {
+                return;
+            }
+            else
+            {
+                button11.BackColor = Color.Red;
+                textBox1.Text += "7";
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "8";
-            button11.BackColor = Color.Red;
+            if (textBox1.Text.Length >= MAX_LNGTH)
+            {
+                return;
+            }
+            else
+            {
+                textBox1.Text += "8";
+                button11.BackColor = Color.Red;
+            }
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            button11.BackColor = Color.Red;
-            textBox1.Text += "9";
+            if (textBox1.Text.Length >= MAX_LNGTH)
+            {
+                return;
+            }
+            else
+            {
+                button11.BackColor = Color.Red;
+                textBox1.Text += "9";
+            }
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            button11.BackColor = Color.Red;
-            textBox1.Text += "0";
-            if (textBox1.Text == "0")
+            if (textBox1.Text.Length >= MAX_LNGTH)
             {
-                MessageBox.Show("cant enter 0 at first!!");
+                return;
+            }
+            else
+            {
+                button11.BackColor = Color.Red;
+                textBox1.Text += "0";
+                //if (textBox1.Text == "0")
+                //{
+                //    MessageBox.Show("cant enter 0 at first!!");
+                //}
             }
         }
+
+        #endregion //click me
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -128,9 +206,7 @@ namespace Numpad
             if (numpad_value > 10000)
             {
                 MessageBox.Show("MAX 10000!");
-                //form1.numericUpDown1.Value = 0;
                 numpad_value = numpad_preval;
-                //textBox1.Text = "";
                 return;
             }
             else
@@ -144,7 +220,6 @@ namespace Numpad
 
         private void numpad_Load(object sender, EventArgs e)
         {
-            this.Text = numpad_value.ToString();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -163,12 +238,8 @@ namespace Numpad
             if (numpad_value > 10000)
             {
                 MessageBox.Show("MAX 10000!");
-                //form1.numericUpDown1.Value = 0;
                 numpad_value = numpad_preval;
-                //textBox1.Text = "";
-                this.Close();
             }
-            
         }
     }
 }

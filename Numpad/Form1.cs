@@ -19,7 +19,6 @@ namespace Numpad
         public int shared_value { get; set; }
         public Thread thread1;
         public Thread thread2;
-        Form1 form1;
 
         public Form1()
         {
@@ -52,7 +51,7 @@ namespace Numpad
 
             }
         }
-        private void threadtest(int numric)
+        private void thread_begin(int numric)
         {
             if (numric == 1)
             {
@@ -90,17 +89,19 @@ namespace Numpad
 
         private void numericUpDown1_Click(object sender, EventArgs e)
         {
-            thread1 = new Thread(new ThreadStart(() => threadtest(1)));
+            thread1 = new Thread(new ThreadStart(() => thread_begin(1)));
 
             bool thread1_started = false;
             if (!thread1_started)
             {
-                numericUpDown1.Enabled = false;
-                numericUpDown2.Enabled = false;
-                button1.Enabled = false;
-                button2.Enabled = false;
-                button3.Enabled = false;
-                button4.Enabled = false;
+                foreach (Control item in this.Controls) //disable all controls in this form
+                {
+                    item.Enabled = false;
+                    if (item == label1)
+                    {
+                        label1.Enabled = true;
+                    }
+                }
                 thread1.Start();
                 thread1_started = true;
 
@@ -119,22 +120,19 @@ namespace Numpad
             if (numericUpDown1.InvokeRequired)
             {
                 numericUpDown1.Invoke(new Action(() => numericUpDown1.Value = value));
-                numericUpDown1.Invoke(new Action(() => numericUpDown1.Enabled = true));
-                numericUpDown1.Invoke(new Action(() => numericUpDown2.Enabled = true));
-                numericUpDown1.Invoke(new Action(() => button1.Enabled = true));
-                numericUpDown1.Invoke(new Action(() => button2.Enabled = true));
-                numericUpDown1.Invoke(new Action(() => button3.Enabled = true));
-                numericUpDown1.Invoke(new Action(() => button4.Enabled = true));
+                foreach (Control item in this.Controls) // reenable all controls after the numpad is closed
+                {
+                    numericUpDown1.Invoke(new Action(() => item.Enabled = true));
+                }
+
             }
             else
             {
                 numericUpDown1.Value = value;
-                button1.Enabled = true;
-                button2.Enabled = true;
-                button3.Enabled = true;
-                button4.Enabled = true;
-                numericUpDown1.Enabled = true;
-                numericUpDown2.Enabled = true;
+                foreach (Control item in this.Controls) // reenable all controls after the numpad is closed
+                {
+                    item.Enabled = true;
+                }
             }
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -194,18 +192,23 @@ namespace Numpad
 
         private void numericUpDown2_Click(object sender, EventArgs e)
         {
-            thread2 = new Thread(() => threadtest(2));
+            thread2 = new Thread(() => thread_begin(2));
 
             bool thread2_started = false;
             if (!thread2_started)
             {
-                numericUpDown2.Enabled = false;
-                numericUpDown1.Enabled = false;
-                button3.Enabled = false;
-                button4.Enabled = false;
-                button1.Enabled = false;
-                button2.Enabled = false;
+
+                foreach (Control item in this.Controls) // disables all control with in the form is a whole
+                {
+
+                    item.Enabled = false;
+                    if(item == label1)
+                    {
+                        label1.Enabled = true;
+                    }
+                }
                 thread2.Start();
+                
                 thread2_started = true;
 
             }
@@ -221,30 +224,24 @@ namespace Numpad
             if (numericUpDown2.InvokeRequired)
             {
                 numericUpDown2.Invoke(new Action(() => numericUpDown2.Value = value));
-                numericUpDown2.Invoke(new Action(() => numericUpDown1.Enabled = true));
-                numericUpDown2.Invoke(new Action(() => numericUpDown2.Enabled = true));
-                numericUpDown2.Invoke(new Action(() => button3.Enabled = true));
-                numericUpDown2.Invoke(new Action(() => button4.Enabled = true));
-                numericUpDown2.Invoke(new Action(() => button1.Enabled = true));
-                numericUpDown2.Invoke(new Action(() => button2.Enabled = true));
+                foreach (Control item in this.Controls) // reenables all control with in the form is a whole
+                {
+                    numericUpDown2.Invoke(new Action(() => item.Enabled = true));
+                }
 
             }
             else
             {
                 numericUpDown2.Value = value;
-                button3.Enabled = true;
-                button4.Enabled = true;
-                button1.Enabled = true;
-                button2.Enabled = true;
-                numericUpDown2.Enabled = true;
-                numericUpDown1.Enabled = true;
+                foreach (Control item in this.Controls) // reenables all control with in the form is a whole
+                {
+                    item.Enabled = false;
+                }
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            OnActivated(e);
-
             if (numericUpDown2.Value == 0)
             {
                 button3.BackColor = Color.LightCoral;
@@ -270,20 +267,7 @@ namespace Numpad
                 label1.BackColor = Color.Red;
             }
         }
-        private void working_tester()
-        {
-
-            while (true)
-            {
-
-                label1.BackColor = Color.Red;
-                Thread.Sleep(500);
-
-                label1.BackColor = Color.Green;
-                Thread.Sleep(500);
-            }
-        }
-
+     
         private void numericUpDown1_KeyDown(object sender, KeyEventArgs e)
         {
 
@@ -291,7 +275,7 @@ namespace Numpad
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) // CLOSE FORM AND ALL THREADS
         {
-            if (thread1 != null && thread2 == null)
+            if (thread1 != null && thread2 == null) // close all threads when main form closes
             {
                 thread1.Abort();
             }
@@ -305,16 +289,6 @@ namespace Numpad
                 thread1.Abort();
             }
         }
-
-        private void toolStripMenuItem2_Click(object sender, EventArgs e) //NEW BUTTON ON THE STRIPDOWN MENUE
-        {
-            Form2 newMDIChild = new Form2(form1);
-            // Set the Parent Form of the Child window.
-            newMDIChild.MdiParent = this;
-            // Display the new form.
-            newMDIChild.Show();
-        }
-
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
 
