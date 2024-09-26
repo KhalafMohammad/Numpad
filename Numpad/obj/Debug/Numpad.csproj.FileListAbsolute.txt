@@ -1,0 +1,12 @@
+C:\Users\ZTIMohammadIOT\source\repos\Numpad\bin\Debug\Numpad.exe.config
+C:\Users\ZTIMohammadIOT\source\repos\Numpad\bin\Debug\Numpad.exe
+C:\Users\ZTIMohammadIOT\source\repos\Numpad\bin\Debug\Numpad.pdb
+C:\Users\ZTIMohammadIOT\source\repos\Numpad\obj\Debug\Numpad.csproj.AssemblyReference.cache
+C:\Users\ZTIMohammadIOT\source\repos\Numpad\obj\Debug\Numpad.Form1.resources
+C:\Users\ZTIMohammadIOT\source\repos\Numpad\obj\Debug\Numpad.numpad.resources
+C:\Users\ZTIMohammadIOT\source\repos\Numpad\obj\Debug\Numpad.Properties.Resources.resources
+C:\Users\ZTIMohammadIOT\source\repos\Numpad\obj\Debug\Numpad.csproj.GenerateResource.cache
+C:\Users\ZTIMohammadIOT\source\repos\Numpad\obj\Debug\Numpad.csproj.CoreCompileInputs.cache
+C:\Users\ZTIMohammadIOT\source\repos\Numpad\obj\Debug\Numpad.exe
+C:\Users\ZTIMohammadIOT\source\repos\Numpad\obj\Debug\Numpad.pdb
+C:\Users\ZTIMohammadIOT\source\repos\Numpad\obj\Debug\Numpad.Form2.resources
